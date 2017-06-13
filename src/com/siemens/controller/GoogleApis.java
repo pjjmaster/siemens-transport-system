@@ -9,5 +9,7 @@ public interface GoogleApis {
 	String getDistanceBetLocations(StartLocation start, EndLocation end);
 
 	Location getNearByPlace(Location location);
+	
+	String getAddressForLocation(double lat, double lng);
 
 }
