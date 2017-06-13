@@ -146,10 +146,13 @@
 										</div>
 									</div>
 
-
+									<div class="form-group">
 									<div class="col-sm-offset-2">
 										<button type="submit" class="btn btn-default">Register</button>
 									</div>
+									<div class="col-sm-offset-2">
+									<button class="btn btn-default"><a href="EmployeeController?action=listAllEmployee">View-All-Records</a></button>
+								</div>
 								</form>
 							</div>
 
@@ -159,7 +162,7 @@
 
 
 					<p>
-						<a href="EmployeeController?action=listAllEmployee">View-All-Records</a>
+						
 					</p>
 
 					<div id="mapPopupDiv" style="display: none;">

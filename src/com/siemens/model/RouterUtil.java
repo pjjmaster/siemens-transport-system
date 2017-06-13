@@ -8,7 +8,7 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.siemens.bean.LatLong;
+import com.siemens.bean.distanceapi.LatLong;
 
 public class RouterUtil {
 

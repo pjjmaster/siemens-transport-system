@@ -86,7 +86,7 @@
 	
 
 
-	<h3 class="inner-tittle two">Employee List</h3>
+	<h3 class="inner-tittle two">Employee List</h3> <button class="btn btn-default"><a href="EmployeeController?action=insert">Add Employee</a></button>
 	<div class="graph">
 		<div class="tables">
 
@@ -129,7 +129,7 @@
 			</table>
 		</div>
 		<p>
-		<a href="EmployeeController?action=insert">Add Employee</a>
+		
 	</p>
 	</div>
 	
@@ -154,7 +154,8 @@
 							   <!--//down-->
 								<div class="menu">
 									<ul id="menu" >
-										<li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Employee List</span></a></li>
+										<li><a href="EmployeeController?action=listAllEmployee"><i class="fa fa-tachometer"></i> <span>Employee List</span></a></li>
+										<li><a href="EmployeeController?action=insert"><i class="fa fa-tachometer"></i> <span>Add Employee</span></a></li>
 										 
 										 <li id="menu-academico" ><a href="#"><i class="fa fa-file-text-o"></i> <span>Pickup Points</span> <span class="fa fa-angle-right" style="float: right"></span></a>
 											 	

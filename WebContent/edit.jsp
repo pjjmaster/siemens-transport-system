@@ -3,109 +3,327 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="com.siemens.bean.Employee"%>
 <%@ page import="com.siemens.dao.EmployeeDao"%>
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<head>
+<title>Siemens Employee Transport Services</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Siemens Employee Transport Services" />
+<script type="application/x-javascript">
+	
+	
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBPHqIMR9dGhP1LyOI5wZPuSGrhUVqLwRY"></script>
-<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-<title>Edit Employee</title>
-<script src="<%=request.getContextPath()%>/js/jquery-1.12.0.min.js" type="text/javascript"></script>
- <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js" type="text/javascript"></script>
- 
+
+
+</script>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- Graph CSS -->
+<link href="css/font-awesome.css" rel="stylesheet">
+<!-- jQuery -->
+<link
+	href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400'
+	rel='stylesheet' type='text/css'>
+<!-- lined-icons -->
+<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+<!-- //lined-icons -->
+<script src="<%=request.getContextPath()%>/js/jquery-1.12.0.min.js"
+	type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"
+	type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/js/amcharts.js"></script>
+<script src="<%=request.getContextPath()%>/js/serial.js"></script>
+<script src="<%=request.getContextPath()%>/js/light.js"></script>
+<script src="<%=request.getContextPath()%>/js/radar.js"></script>
+<link href="css/barChart.css" rel='stylesheet' type='text/css' />
+<link href="css/fabochart.css" rel='stylesheet' type='text/css' />
+<!--clock init-->
+<script src="<%=request.getContextPath()%>/js/css3clock.js"></script>
+<!--Easy Pie Chart-->
+<!--skycons-icons-->
+<script src="<%=request.getContextPath()%>/js/skycons.js"></script>
+
+<script src="<%=request.getContextPath()%>/js/jquery.easydropdown.js"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBPHqIMR9dGhP1LyOI5wZPuSGrhUVqLwRY"></script>
+<link type="text/css" rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Add New Employee</title>
+
+
 </head>
 <body>
-<%
-	Employee employee = new Employee();
-	EmployeeDao dao = new EmployeeDao();
+	<div class="page-container">
+		<!--/content-inner-->
+		<div class="left-content">
+			<div class="inner-content">
+				<!-- header-starts -->
+				<div class="header-section">
+					<!--menu-right-->
+					<div class="top_menu">
 
- 	String uid = request.getParameter("empId");
- 	if (!((uid) == null)) {
- 		employee = dao.getEmployeeById(uid);
- 		
-	} else
-		out.println("ID Not Found");
-%>
-<form method="POST" action='EmployeeController' name="frmEditEmployee">
-<input type="hidden" name="action" value="edit" /> 
-
-<table>
-	<tr>
-		<td>Employee ID</td>
-		<td><input type="text" name="empId" readonly="readonly" value="<%=employee.getId()%>"></td>
-	</tr>
-	<tr>
-		<td>Employee Name</td>
-		<td><input type="text" name="empName" value="<%=employee.getName()%>" ></td>
-	</tr>
-	<tr>
-		<td>Address</td>
-		<td><input type="text" name="address" value="<%=employee.getAddress()%>" id="addressaddress1"></td>
-		<!-- <td><textarea placeholder="Enter Area name to populate Latitude and Longitude" name="address" onFocus="initializeAutocomplete()" id="addressaddress1" ></textarea><br></td>
-		 --><td><a href="javascript:void(0)" onclick="popupMapView(<%=employee.getLatitude()%>,<%=employee.getLongitude()%>);" style="width: 96px"><img src="<%=request.getContextPath()%>/images/map-icon-1.png" alt="Map" width="24" height="24" border="0">
-                                </a>
-                                <td>
-	</tr>
-	<tr>
-		<td>Latitude</td>
-		<td><input type="text" name="latitude" id="addresslatitude" value="<%=employee.getLatitude()%>"></td>
-	</tr>
-	<tr>
-		<td>Longitude</td>
-		<td><input type="text" name="longitude" id="addresslongitude" value="<%=employee.getLongitude()%>"></td>
-	</tr>
-	<tr>
-		<td>Pick-Up Point</td>
-		<td><input type="text" name="PickUpPoint" value="<%=employee.getPickUpPoint()%>" ></td>
-	</tr>
-	<tr>
-		<td>Pin code</td>
-		<td><input type="text" name="pinCode" value="<%=employee.getPincode()%>"> </td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><input type="submit" value="Update" /></td>
-	</tr>
-</table>
-
-</form>
+						<img src=" width=" 160" height="50" alt="">
 
 
-<div id="mapPopupDiv" style="display: none;">
-        <h1 style="font-size: large;text-align: center;">Edit address</h1>
-        <br>
+					</div>
+					<!--//menu-right-->
+					<div class="clearfix"></div>
+				</div>
 
-        <div class="tabs">
+				<div class="set-1">
+					<div class="col-md-12">
+						<h3 class="inner-tittle two">Update Employee</h3>
+						<div class="grid-1">
+							<div class="form-body">
+								<%
+									Employee employee = new Employee();
+									EmployeeDao dao = new EmployeeDao();
+
+									String uid = request.getParameter("empId");
+									if (!((uid) == null)) {
+										employee = dao.getEmployeeById(uid);
+
+									} else
+										out.println("ID Not Found");
+								%>
+								<form method="POST" action='EmployeeController'
+									name="frmEditEmployee">
+									<input type="hidden" name="action" value="edit" />
 
 
-            <ul class="tab-links">
-                <li style="float:left;width:85%;margin-right:5%;">
-                    Search Address:<br>
-                    <div class="search_box">
-                        <textarea id="pac-input" placeholder="Search location" rows="3" cols="40"></textarea>&nbsp;
-                        <img src="<%=request.getContextPath()%>/images/directionImg_red.png" alt="Edit" width="20" height="34" border="0">
-                    </div>
-                </li>
-            </ul>
-            <br>
-            <ul class="tab-links">
-                <li>Latitude: <input type="text" id="mLat" placeholder="Latitude" readonly=""></li>
-                <li>Longitude: <input type="text" id="mLng" placeholder="Longitude" readonly=""></li>
-            </ul>
-            <div class="tab-content">
-                <div id="tab1" class="tab active">
-                    <div id="popupContent">
-                        <div id="map-canvas" style="width: 100%; height: 300px;"></div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <a href="javascript:void(0)" class="hc-button-blue" id="saveAddr">Set</a>&nbsp;&nbsp;
-                <a href="javascript:void(0)" class="hc-button-blue" id="cancelAddrUpdate">Cancel</a>
-            </div>
-        </div>
-    </div>
-</body>
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label">Employee
+											Id</label>
+										<div class="col-sm-9">
+											<input type="text" name="empId" class="form-control"
+												readonly="readonly" value="<%=employee.getId()%>"
+												id="inputEmail3" placeholder="Employee Id">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label">Employee
+											Name</label>
+										<div class="col-sm-9">
+											<input input type="text" name="empName" class="form-control"
+												value="<%=employee.getName()%>" id="inputEmail3"
+												placeholder="Employee Name">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label">Employee
+											Address</label>
+										<div class="col-sm-9">
+											<textarea class="form-control"
+												value="<%=employee.getAddress()%>"
+												placeholder="Enter Area name to populate Latitude and Longitude"
+												name="address" onFocus="initializeAutocomplete()"
+												id="addressaddress1"></textarea>
+											<a href="javascript:void(0)"
+												onclick="popupMapView(<%=employee.getLatitude()%>,<%=employee.getLongitude()%>);"
+												style="width: 96px"><img
+												src="<%=request.getContextPath()%>/images/map-icon-1.png"
+												alt="Map" width="24" height="24" border="0"> </a>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Latitude</label>
+										<div class="col-sm-9">
+											<input input type="text" class="form-control"
+												name="longitude" id="addresslatitude"
+												value="<%=employee.getLatitude()%>" placeholder="Longitude">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Longitude</label>
+										<div class="col-sm-9">
+											<input input type="text" class="form-control"
+												name="longitude" id="addresslongitude"
+												value="<%=employee.getLongitude()%>" placeholder="Longitude">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label">Pick
+											Up Point</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" name="pickUpPoint"
+												value="<%=employee.getPickUpPoint()%>">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-2 control-label">PinCode</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control"
+												value="<%=employee.getPincode()%>" name="pinCode">
+										</div>
+									</div>
+
+
+									<div class="col-sm-offset-2">
+										<button type="submit" class="btn btn-default">Update</button>
+									</div>
+									<%-- <table>
+										<tr>
+											<td>Employee ID</td>
+											<td><input type="text" name="empId" readonly="readonly"
+												value="<%=employee.getId()%>"></td>
+										</tr>
+										<tr>
+											<td>Employee Name</td>
+											<td><input type="text" name="empName"
+												value="<%=employee.getName()%>"></td>
+										</tr>
+										<tr>
+											<td>Address</td>
+											<td><input type="text" name="address"
+												value="<%=employee.getAddress()%>" id="addressaddress1"></td>
+											<!-- <td><textarea placeholder="Enter Area name to populate Latitude and Longitude" name="address" onFocus="initializeAutocomplete()" id="addressaddress1" ></textarea><br></td>
+		 -->
+											<td><a href="javascript:void(0)"
+												onclick="popupMapView(<%=employee.getLatitude()%>,<%=employee.getLongitude()%>);"
+												style="width: 96px"><img
+													src="<%=request.getContextPath()%>/images/map-icon-1.png"
+													alt="Map" width="24" height="24" border="0"> </a>
+											<td>
+										</tr>
+										<tr>
+											<td>Latitude</td>
+											<td><input type="text" name="latitude"
+												id="addresslatitude" value="<%=employee.getLatitude()%>"></td>
+										</tr>
+										<tr>
+											<td>Longitude</td>
+											<td><input type="text" name="longitude"
+												id="addresslongitude" value="<%=employee.getLongitude()%>"></td>
+										</tr>
+										<tr>
+											<td>Pick-Up Point</td>
+											<td><input type="text" name="PickUpPoint"
+												value="<%=employee.getPickUpPoint()%>"></td>
+										</tr>
+										<tr>
+											<td>Pin code</td>
+											<td><input type="text" name="pinCode"
+												value="<%=employee.getPincode()%>"></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td><input type="submit" value="Update" /></td>
+										</tr>
+									</table>
+ --%>
+								</form>
+							</div>
+
+						</div>
+					</div>
+					<div class="sidebar-menu">
+						<header class="logo"> <img src="images/siemens-logo.png"
+							width="160" height="50" alt=""> </a> </header>
+						<div style="border-top: 1px solid rgba(69, 74, 84, 0.7)"></div>
+						<!--/down-->
+						<div class="down">
+							<a href="index.html"><img src="images/admin.jpg"></a> <a
+								href="index.html"><span class=" name-caret">Ssdgj
+									sdgsg</span></a>
+							<p>Transport Administrator</p>
+							<ul>
+								<li><a class="tooltips" href="index.html"><span>Profile</span><i
+										class="lnr lnr-user"></i></a></li>
+								<li><a class="tooltips" href="index.html"><span>Settings</span><i
+										class="lnr lnr-cog"></i></a></li>
+								<li><a class="tooltips" href="index.html"><span>Log
+											out</span><i class="lnr lnr-power-switch"></i></a></li>
+							</ul>
+						</div>
+						<!--//down-->
+						<div class="menu">
+							<ul id="menu">
+								<li><a href="EmployeeController?action=listAllEmployee"><i class="fa fa-tachometer"></i> <span>Employee List</span></a></li>
+										<li><a href="EmployeeController?action=insert"><i class="fa fa-tachometer"></i> <span>Add Employee</span></a></li>
+										 
+								<li id="menu-academico"><a href="#"><i
+										class="fa fa-file-text-o"></i> <span>Pickup Points</span> <span
+										class="fa fa-angle-right" style="float: right"></span></a>
+
+									<li><a href="typography.html"><i class="lnr lnr-pencil"></i> <span>Clusters</span></a></li>
+									<li id="menu-academico"><a href="#"><i
+										class="lnr lnr-book"></i> <span>Routes</span> <span
+										class="fa fa-angle-right" style="float: right"></span></a>
+									</li>
+									 
+							        
+									<li><a href="chart.html"><i class="lnr lnr-chart-bars"></i> <span>Charts</span> <span
+										class="fa fa-angle-right" style="float: right"></span></a>
+									  <ul>
+										<li><a href="map.html"><i class="lnr lnr-map"></i> Maps</a></li>
+										<li><a href="graph.html"><i class="lnr lnr-apartment"></i> Graph Visualization</a></li>
+									</ul>
+									</li>
+									
+								  </ul>
+								</div>
+							  </div>
+							  <div class="clearfix"></div>		
+							</div>
+
+
+								
+						<div id="mapPopupDiv" style="display: none;">
+										<h1 style="font-size: large; text-align: center;">Edit
+										address</h1>
+									<br>
+
+									<div class="tabs">
+
+
+										<ul class="tab-links">
+											<li style="float: left; width: 85%; margin-right: 5%;">
+												Search Address:<br>
+												<div class="search_box">
+													<textarea id="pac-input" placeholder="Search location"
+															rows="3" cols="40"></textarea>
+													&nbsp; <img
+															src="<%=request.getContextPath()%>/images/directionImg_red.png"
+															alt="Edit" width="20" height="34" border="0">
+												</div>
+											</li>
+										</ul>
+										<br>
+										<ul class="tab-links">
+											<li>Latitude: <input type="text" id="mLat"
+													placeholder="Latitude" readonly=""></li>
+											<li>Longitude: <input type="text" id="mLng"
+													placeholder="Longitude" readonly=""></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab1" class="tab active">
+												<div id="popupContent">
+													<div id="map-canvas" style="width: 100%; height: 300px;"></div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<a href="javascript:void(0)" class="hc-button-blue"
+													id="saveAddr">Set</a>&nbsp;&nbsp; <a
+													href="javascript:void(0)" class="hc-button-blue"
+													id="cancelAddrUpdate">Cancel</a>
+										</div>
+									</div>
+								</div>
+
+								</body>
 
 <script type="text/javascript">
   
@@ -359,183 +577,180 @@ var mapProp = {
 </script>
 
 <style>
-.addressTextArea{
-  width:200px;
-  height:70px;
+.addressTextArea {
+	width: 200px;
+	height: 70px;
 }
 </style>
 
 <style>
-
 #mapPopupDiv {
-  background: none repeat scroll 0 0 #FFFFFF;
-  border: 5px solid #808080;
-  left: 20%;
-  max-height: 600px;
-  overflow: scroll;
-  padding: 10px;
-  position: fixed;
-  top: 10%;
-  width: 60%;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 5px solid #808080;
+	left: 20%;
+	max-height: 600px;
+	overflow: scroll;
+	padding: 10px;
+	position: fixed;
+	top: 10%;
+	width: 60%;
 }
 
 #popupContent {
-  max-height: 600px;
+	max-height: 600px;
 }
 
 #pac-input {
-  height: 30px;
-  width: 85%;
-  resize: none;
-  margin-bottom: 0.5em;
-  margin-left: 0.3em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+	height: 30px;
+	width: 85%;
+	resize: none;
+	margin-bottom: 0.5em;
+	margin-left: 0.3em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 }
 
-.popBtn  {
-  background-color: none !important;
-  border: none;
-  display: block;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
+.popBtn {
+	background-color: none !important;
+	border: none;
+	display: block;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
 }
 
 #close {
-  position: fixed;
-  top: 7%;
-  left: 80%;
-  cursor: pointer;
+	position: fixed;
+	top: 7%;
+	left: 80%;
+	cursor: pointer;
 }
 
 .overlay {
-  position: fixed;
-  height: 100%;
-  background-color: #000;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  opacity: 0.4;
+	position: fixed;
+	height: 100%;
+	background-color: #000;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	opacity: 0.4;
 }
 
 .tabs {
-  width:100%;
-  display:inline-block;
+	width: 100%;
+	display: inline-block;
 }
 
 .tab-links:after {
-  display:block;
-  clear:both;
-  content:'';
+	display: block;
+	clear: both;
+	content: '';
 }
 
 .tab-links li {
-  margin:0px 5px;
-  float:left;
-  list-style:none;
+	margin: 0px 5px;
+	float: left;
+	list-style: none;
 }
 
 .tab-links a {
-  padding:9px 15px;
-  display:inline-block;
-  font-size:16px;
-  font-weight:600;
-  color:#4c4c4c;
-  transition:all linear 0.15s;
+	padding: 9px 15px;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+	color: #4c4c4c;
+	transition: all linear 0.15s;
 }
 
 .tab-links a:hover {
-  text-decoration:none;
+	text-decoration: none;
 }
 
 li.active a, li.active a:hover {
-  color:red;
-  font-weight:bold;
+	color: red;
+	font-weight: bold;
 }
 
 .tab-content {
-  padding:15px;
-  border-radius:3px;
+	padding: 15px;
+	border-radius: 3px;
 }
 
 .tab {
-  display:none;
+	display: none;
 }
 
 .tab.active {
-  display:block;
+	display: block;
 }
 
 li.active {
-  color: #fff;
-  background: grey;
+	color: #fff;
+	background: grey;
 }
 
 ul {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 li {
-  list-style: none;
-  margin: 0px;
-  padding: 2px;
+	list-style: none;
+	margin: 0px;
+	padding: 2px;
 }
 
 Section {
-  text-align: left;
-  width: 300px;
-  height: 200px;
-  border: 2px solid grey;
-  padding: 15px;
-  overflow-x: auto;
+	text-align: left;
+	width: 300px;
+	height: 200px;
+	border: 2px solid grey;
+	padding: 15px;
+	overflow-x: auto;
 }
 
 #pop-up {
-  position: fixed;
-  top: 20%;
-  left: 25%;
-  overflow: scroll;
-  border: 5px solid gray;
-  padding: 10px;
-  background: white; /*width: 370px;*/
-  width: 60%;
-  height: 30%;
-  overflow-x: auto;
+	position: fixed;
+	top: 20%;
+	left: 25%;
+	overflow: scroll;
+	border: 5px solid gray;
+	padding: 10px;
+	background: white; /*width: 370px;*/
+	width: 60%;
+	height: 30%;
+	overflow-x: auto;
 }
 
 .pop {
-
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  text-align: center;
-  padding: 0px;
-  text-decoration: none;
-  margin: 0 auto;
-  font-weight: bold;
-  margin-top: -3px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	text-align: center;
+	padding: 0px;
+	text-decoration: none;
+	margin: 0 auto;
+	font-weight: bold;
+	margin-top: -3px;
 }
 
-
 #close {
-  position: fixed;
-  top: 18%;
-  left: 86%;
-  cursor: pointer;
+	position: fixed;
+	top: 18%;
+	left: 86%;
+	cursor: pointer;
 }
 
 .overlay {
-  position: fixed;
-  height: 100%;
-  background-color: #000;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  opacity: 0.4;
+	position: fixed;
+	height: 100%;
+	background-color: #000;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	opacity: 0.4;
 }
 </style>
 </html>
