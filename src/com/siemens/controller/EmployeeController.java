@@ -75,7 +75,7 @@ public class EmployeeController extends HttpServlet {
             employee.setLongitude(longitude);
             employee.setPickUpPoint(pickUpPoint);
             employee.setPincode((pincode));
-            dao.editEmployee(employee);
+            dao.updateEmployee(employee);
             request.setAttribute("employee", employee);
             redirect = EmployeeRecord;
             System.out.println("Record updated Successfully"+employee.toString());

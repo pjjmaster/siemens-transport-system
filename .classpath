@@ -21,10 +21,10 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_131">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/commons-math3-3.4.jar"/>
+	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/jSprit-CustomAnalytics.jar"/>
+	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/jSprit-CustomCore.jar"/>
+	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/slf4j-api-1.7.21.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

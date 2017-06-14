@@ -7,27 +7,38 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import com.siemens.bean.Employee;
 import com.siemens.bean.LatLong;
 import com.siemens.bean.PickUpPoint;
-
 import com.siemens.bean.distanceapi.EndLocation;
 import com.siemens.bean.distanceapi.StartLocation;
 import com.siemens.controller.GoogleApis;
 import com.siemens.controller.GoogleApisImpl;
 import com.siemens.dao.EmployeeDao;
+import com.siemens.dao.PickUpPointDao;
 
 public class RouterUtil {
 
 	static GoogleApis service = new GoogleApisImpl();
 	static EmployeeDao empDao = new EmployeeDao();
 	final static String DEF_LOCATION_NAME = "Siemens Employee PickUp Location";
+	
+	public static void main(String... args) throws Exception {
+		
+
+		List<Employee> empList = new EmployeeDao().getAllEmployee();
+		PickUpPointDao pointDao=new PickUpPointDao();
+
+		HashMap<String, List<Employee>> clustedEmpList = findClusteredEmployee(empList);
+		List<PickUpPoint> pickUpPoints = getPickUpPoints(clustedEmpList);
+		System.out.println("All pickUp Points" + pickUpPoints);
+		pointDao.clearAllPickUpPoits();
+		for(PickUpPoint pp:pickUpPoints)
+			pointDao.savePickUpPoint(pp);
+
+	}
 
 	public static double getDistanceBwLatlong(LatLong position1, LatLong position2) {
 
@@ -180,6 +191,8 @@ public class RouterUtil {
 			PickUpPoint pickPoint = null;
 			if (null == nearestLocationToCentralPoint) {
 				pickPoint = new PickUpPoint(nearestLocationToCentralPoint, employeeList);
+				
+				
 			} else {
 				pickPoint = new PickUpPoint(nearestLocationToCentralPoint, employeeList);
 			}

@@ -12,53 +12,62 @@ public class PickUpPoint {
 	private String pickUpLocation;
 	private LatLong geoLocation;
 	private List<Employee> employees;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
+    private String routID;
+	
+	public PickUpPoint(int id, String pickUpLocation, LatLong geoLocation, List<Employee> employees, String routID) {
+		super();
 		this.id = id;
-	}
-
-	public String getPickUpLocation() {
-		return pickUpLocation;
-	}
-
-	public void setPickUpLocation(String pickUpLocation) {
 		this.pickUpLocation = pickUpLocation;
-	}
-
-	public LatLong getGeoLocation() {
-		return geoLocation;
-	}
-
-	public void setGeoLocation(LatLong geoLocation) {
 		this.geoLocation = geoLocation;
-	}
-
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+		this.routID = routID;
 	}
-
-	public PickUpPoint() {
-	};
-
+	
 	public PickUpPoint(LatLong geoLocation, List<Employee> empList) {
 		this.geoLocation = geoLocation;
 		this.employees = empList;
 
 	}
+	public PickUpPoint() {
+		// TODO Auto-generated constructor stub
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getPickUpLocation() {
+		return pickUpLocation;
+	}
+	public void setPickUpLocation(String pickUpLocation) {
+		this.pickUpLocation = pickUpLocation;
+	}
+	public LatLong getGeoLocation() {
+		return geoLocation;
+	}
+	public void setGeoLocation(LatLong geoLocation) {
+		this.geoLocation = geoLocation;
+	}
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+	public String getRoutID() {
+		return routID;
+	}
+	public void setRoutID(String routID) {
+		this.routID = routID;
+	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
+
+	@Override
+	public String toString() {
+		return "PickUpPoint [id=" + id + ", pickUpLocation=" + pickUpLocation + ", geoLocation=" + geoLocation
+				+ ", employees=" + employees + ", routID=" + routID + "]";
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,59 +76,40 @@ public class PickUpPoint {
 		result = prime * result + ((geoLocation == null) ? 0 : geoLocation.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((pickUpLocation == null) ? 0 : pickUpLocation.hashCode());
+		result = prime * result + ((routID == null) ? 0 : routID.hashCode());
 		return result;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof PickUpPoint)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		PickUpPoint other = (PickUpPoint) obj;
 		if (employees == null) {
-			if (other.employees != null) {
+			if (other.employees != null)
 				return false;
-			}
-		} else if (!employees.equals(other.employees)) {
+		} else if (!employees.equals(other.employees))
 			return false;
-		}
 		if (geoLocation == null) {
-			if (other.geoLocation != null) {
+			if (other.geoLocation != null)
 				return false;
-			}
-		} else if (!geoLocation.equals(other.geoLocation)) {
+		} else if (!geoLocation.equals(other.geoLocation))
 			return false;
-		}
-		if (id != other.id) {
+		if (id != other.id)
 			return false;
-		}
 		if (pickUpLocation == null) {
-			if (other.pickUpLocation != null) {
+			if (other.pickUpLocation != null)
 				return false;
-			}
-		} else if (!pickUpLocation.equals(other.pickUpLocation)) {
+		} else if (!pickUpLocation.equals(other.pickUpLocation))
 			return false;
-		}
+		if (routID == null) {
+			if (other.routID != null)
+				return false;
+		} else if (!routID.equals(other.routID))
+			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "PickUpPoint [id=" + id + ", pickUpLocation=" + pickUpLocation + ", geoLocation=" + geoLocation
-				+ ", employees=" + employees + ", getId()=" + getId() + ", getPickUpLocation()=" + getPickUpLocation()
-				+ ", getGeoLocation()=" + getGeoLocation() + ", getEmployees()=" + getEmployees() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-
 }

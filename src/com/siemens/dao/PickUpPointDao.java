@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.siemens.bean.LatLong;
 import com.siemens.bean.PickUpPoint;
@@ -32,6 +33,13 @@ public class PickUpPointDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public void savePickUpPointsList(List<PickUpPoint> picikUpPointList){
+		
+		for(PickUpPoint pickPoint:picikUpPointList){
+			savePickUpPoint(pickPoint);
+		}
+		
 	}
 
 	public PickUpPoint getPickUpPointById(int pickUpId) {
