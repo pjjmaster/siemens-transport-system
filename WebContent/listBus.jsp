@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="com.siemens.bean.Employee"%>
-<%@ page import="com.siemens.dao.EmployeeDao"%>
+<%@ page import="com.siemens.bean.Bus"%>
+<%@ page import="com.siemens.dao.BusDao"%>
 <%@ page import="java.util.*"%>
 
 <html>
@@ -81,15 +81,15 @@
 					<div class="col-md-12">
 						<%
 							//empBean emp = new empBean();
-							EmployeeDao dao = new EmployeeDao();
-							List<Employee> employeeList = dao.getAllEmployee();
+							BusDao dao = new BusDao();
+							List<Bus> busList = dao.getAllBus();
 						%>
 
 
 
-						<h3 class="inner-tittle two">Employee List</h3>
+						<h3 class="inner-tittle two">Bus Type List</h3>
 						<button class="btn btn-default">
-							<a href="EmployeeController?action=insert">Add Employee</a>
+							<a href="BusController?action=insert">Add Bus Type</a>
 						</button>
 						<div class="graph">
 							<div class="tables">
@@ -98,33 +98,26 @@
 									<thead>
 										<tr>
 											<th>Id</th>
-											<th>Name</th>
-											<th>Address</th>
-											<th>Latitude</th>
-											<th>Longitude</th>
-											<th>Pick Up Point</th>
-											<th>Pin</th>
-											<th>Edit</th>
-
+											<th>Capacity</th>
+											<th>Cost Per KM Per Month</th>
+											<th>Type</th>
 										</tr>
 									</thead>
 									<tbody>
 
 										<%
-											for (Employee emp : employeeList) {
+											for (Bus bus : busList) {
 										%>
 										<tr>
-											<td><%=emp.getId()%></td>
-											<td><%=emp.getName()%></td>
-											<td><%=emp.getAddress()%></td>
-											<td><%=emp.getLatitude()%></td>
-											<td><%=emp.getLongitude()%></td>
-											<td><%=emp.getPickUpPoint()%></td>
-											<td><%=emp.getPincode()%></td>
+											<td><%=bus.getBusID()%></td>
+											<td><%=bus.getBusCapacity()%></td>
+											<td><%=bus.getBusCostPKPM()%></td>
+											<td><%=bus.getType()%></td>
+
 											<td><a
-												href="EmployeeController?action=editform&empId=<%=emp.getId()%>">Update</a>
+												href="BusController?action=editform&busId=<%=bus.getBusID()%>">Update</a>
 												<a
-												href="EmployeeController?action=delete&empId=<%=emp.getId()%>">Delete</a></td>
+												href="BusController?action=delete&busId=<%=bus.getBusID()%>">Delete</a></td>
 
 										</tr>
 										<%

@@ -12,16 +12,9 @@ public class PickUpPoint {
 	private String pickUpLocation;
 	private LatLong geoLocation;
 	private List<Employee> employees;
-    private String routID;
+    private int routeID;
 	
-	public PickUpPoint(int id, String pickUpLocation, LatLong geoLocation, List<Employee> employees, String routID) {
-		super();
-		this.id = id;
-		this.pickUpLocation = pickUpLocation;
-		this.geoLocation = geoLocation;
-		this.employees = employees;
-		this.routID = routID;
-	}
+	
 	
 	public PickUpPoint(LatLong geoLocation, List<Employee> empList) {
 		this.geoLocation = geoLocation;
@@ -31,43 +24,77 @@ public class PickUpPoint {
 	public PickUpPoint() {
 		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+	/**
+	 * @return the pickUpLocation
+	 */
 	public String getPickUpLocation() {
 		return pickUpLocation;
 	}
+	/**
+	 * @param pickUpLocation the pickUpLocation to set
+	 */
 	public void setPickUpLocation(String pickUpLocation) {
 		this.pickUpLocation = pickUpLocation;
 	}
+	/**
+	 * @return the geoLocation
+	 */
 	public LatLong getGeoLocation() {
 		return geoLocation;
 	}
+	/**
+	 * @param geoLocation the geoLocation to set
+	 */
 	public void setGeoLocation(LatLong geoLocation) {
 		this.geoLocation = geoLocation;
 	}
+	/**
+	 * @return the employees
+	 */
 	public List<Employee> getEmployees() {
 		return employees;
 	}
+	/**
+	 * @param employees the employees to set
+	 */
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-	public String getRoutID() {
-		return routID;
+	/**
+	 * @return the routeID
+	 */
+	public int getRouteID() {
+		return routeID;
 	}
-	public void setRoutID(String routID) {
-		this.routID = routID;
+	/**
+	 * @param routeID the routeID to set
+	 */
+	public void setRouteID(int routeID) {
+		this.routeID = routeID;
 	}
-
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "PickUpPoint [id=" + id + ", pickUpLocation=" + pickUpLocation + ", geoLocation=" + geoLocation
-				+ ", employees=" + employees + ", routID=" + routID + "]";
+				+ ", employees=" + employees + ", routeID=" + routeID + "]";
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,40 +103,52 @@ public class PickUpPoint {
 		result = prime * result + ((geoLocation == null) ? 0 : geoLocation.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((pickUpLocation == null) ? 0 : pickUpLocation.hashCode());
-		result = prime * result + ((routID == null) ? 0 : routID.hashCode());
+		result = prime * result + routeID;
 		return result;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof PickUpPoint)) {
 			return false;
+		}
 		PickUpPoint other = (PickUpPoint) obj;
 		if (employees == null) {
-			if (other.employees != null)
+			if (other.employees != null) {
 				return false;
-		} else if (!employees.equals(other.employees))
+			}
+		} else if (!employees.equals(other.employees)) {
 			return false;
+		}
 		if (geoLocation == null) {
-			if (other.geoLocation != null)
+			if (other.geoLocation != null) {
 				return false;
-		} else if (!geoLocation.equals(other.geoLocation))
+			}
+		} else if (!geoLocation.equals(other.geoLocation)) {
 			return false;
-		if (id != other.id)
+		}
+		if (id != other.id) {
 			return false;
+		}
 		if (pickUpLocation == null) {
-			if (other.pickUpLocation != null)
+			if (other.pickUpLocation != null) {
 				return false;
-		} else if (!pickUpLocation.equals(other.pickUpLocation))
+			}
+		} else if (!pickUpLocation.equals(other.pickUpLocation)) {
 			return false;
-		if (routID == null) {
-			if (other.routID != null)
-				return false;
-		} else if (!routID.equals(other.routID))
+		}
+		if (routeID != other.routeID) {
 			return false;
+		}
 		return true;
 	}
+	
 }

@@ -1,44 +1,101 @@
 package com.siemens.bean;
 
 public class Bus {
-	private int capacity;
-	private int cost;
+	private String busID;
+	private String busName;
+	private int busCapacity;
+	private double busCostPKPM;
 	private String type;
-	/**
-	 * @return the capacity
-	 */
-	public int getCapacity() {
-		return capacity;
+	
+	public Bus() {
+		// TODO Auto-generated constructor stub
 	}
-	/**
-	 * @param capacity the capacity to set
-	 */
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public Bus(String busID, String busName, int busCapacity, double busCostPKPM, String type) {
+		super();
+		this.busID = busID;
+		this.busName = busName;
+		this.busCapacity = busCapacity;
+		this.busCostPKPM = busCostPKPM;
+		this.type = type;
 	}
+	
 	/**
-	 * @return the cost
+	 * @return the busID
 	 */
-	public int getCost() {
-		return cost;
+	public String getBusID() {
+		return busID;
 	}
+
 	/**
-	 * @param cost the cost to set
+	 * @param busID the busID to set
 	 */
-	public void setCost(int cost) {
-		this.cost = cost;
+	public void setBusID(String busID) {
+		this.busID = busID;
 	}
+
+	/**
+	 * @return the busName
+	 */
+	public String getBusName() {
+		return busName;
+	}
+
+	/**
+	 * @param busName the busName to set
+	 */
+	public void setBusName(String busName) {
+		this.busName = busName;
+	}
+
+	/**
+	 * @return the busCapacity
+	 */
+	public int getBusCapacity() {
+		return busCapacity;
+	}
+
+	/**
+	 * @param busCapacity the busCapacity to set
+	 */
+	public void setBusCapacity(int busCapacity) {
+		this.busCapacity = busCapacity;
+	}
+
+	/**
+	 * @return the busCostPKPM
+	 */
+	public double getBusCostPKPM() {
+		return busCostPKPM;
+	}
+
+	/**
+	 * @param busCostPKPM the busCostPKPM to set
+	 */
+	public void setBusCostPKPM(double busCostPKPM) {
+		this.busCostPKPM = busCostPKPM;
+	}
+
 	/**
 	 * @return the type
 	 */
 	public String getType() {
 		return type;
 	}
+
 	/**
 	 * @param type the type to set
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Bus [busID=" + busID + ", busName=" + busName + ", busCapacity=" + busCapacity + ", busCostPKPM="
+				+ busCostPKPM + ", type=" + type + "]";
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -47,8 +104,12 @@ public class Bus {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + capacity;
-		result = prime * result + cost;
+		result = prime * result + busCapacity;
+		long temp;
+		temp = Double.doubleToLongBits(busCostPKPM);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((busID == null) ? 0 : busID.hashCode());
+		result = prime * result + ((busName == null) ? 0 : busName.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -67,10 +128,24 @@ public class Bus {
 			return false;
 		}
 		Bus other = (Bus) obj;
-		if (capacity != other.capacity) {
+		if (busCapacity != other.busCapacity) {
 			return false;
 		}
-		if (cost != other.cost) {
+		if (Double.doubleToLongBits(busCostPKPM) != Double.doubleToLongBits(other.busCostPKPM)) {
+			return false;
+		}
+		if (busID == null) {
+			if (other.busID != null) {
+				return false;
+			}
+		} else if (!busID.equals(other.busID)) {
+			return false;
+		}
+		if (busName == null) {
+			if (other.busName != null) {
+				return false;
+			}
+		} else if (!busName.equals(other.busName)) {
 			return false;
 		}
 		if (type == null) {
@@ -82,14 +157,7 @@ public class Bus {
 		}
 		return true;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Bus [capacity=" + capacity + ", cost=" + cost + ", type=" + type + ", getCapacity()=" + getCapacity()
-				+ ", getCost()=" + getCost() + ", getType()=" + getType() + ", hashCode()=" + hashCode()
-				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
-	}
+
+	
 	
 }

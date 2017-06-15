@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.siemens.bean.LatLong;
@@ -61,6 +62,19 @@ public class PickUpPointDao {
 		}
 		return pickUpPoint;
 	}
+	
+	public void updateRouteId(int pickUpId, int routeId) {
+		try {
+			String sql = "UPDATE PICKUPPOINT SET ROUTEID=? WHERE PICKUPPOINTID=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, routeId);
+			ps.setInt(2, pickUpId);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	} 
 
 	public boolean clearAllPickUpPoits() {
 		boolean recordDeleted = false;
@@ -73,4 +87,27 @@ public class PickUpPointDao {
 		}
 		return recordDeleted;
 	}
+	 
+		 public List<PickUpPoint> getAllPickUpPoints() {
+			        List<PickUpPoint> PickUpPointList= new ArrayList<>();
+			        try {
+			        	String sql = "SELECT * FROM PICKUPPOINT";
+			            PreparedStatement ps = conn.prepareStatement(sql);
+			            ResultSet rs = ps.executeQuery();
+			            while (rs.next()) {
+			                PickUpPoint pickUpPoint = new PickUpPoint();
+			                pickUpPoint.setId(rs.getInt("PICKUPPOINTID"));
+			                LatLong latlong = new LatLong(rs.getString("GEOLOCATION_LAT"), rs.getString("GEOLOCATION_LONG"));
+							pickUpPoint.setGeoLocation(latlong);
+			                pickUpPoint.setPickUpLocation(rs.getString("ADDRESS")); 
+			           
+			                PickUpPointList.add(pickUpPoint);
+			            }
+			        } catch (SQLException e) {
+			            e.printStackTrace();
+			        }
+
+			        return PickUpPointList;
+			    } 
+
 }
