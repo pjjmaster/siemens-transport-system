@@ -155,11 +155,9 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", address=" + address + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", pickUpPoint=" + pickUpPoint + ", pincode=" + pincode
-				+ ", geoHashCode=" + geoHashCode + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", longitude=" + longitude + ", pickUpPoint=" + pickUpPoint +", geoHashCode=" + geoHashCode + ", getId()=" + getId() + ", getName()=" + getName()
 				+ ", getAddress()=" + getAddress() + ", getLatitude()=" + getLatitude() + ", getLongitude()="
-				+ getLongitude() + ", getPickUpPoint()=" + getPickUpPoint() + ", getPincode()=" + getPincode()
-				+ ", getGeoHashCode()=" + getGeoHashCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ getLongitude() + ", getPickUpPoint()=" +", getGeoHashCode()=" + getGeoHashCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
 	

@@ -120,4 +120,31 @@ public class EmployeeDao {
 		}
 		return emp;
 	}
+	
+	public List<Employee> getEmployeesByPickUpPoint(String PickUpPointId) {
+		List<Employee> employeeList = new ArrayList<>();
+		try {
+
+			String sql = "SELECT * FROM Employee WHERE way_point=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, PickUpPointId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Employee emp = new Employee();
+				emp.setId(rs.getString("emp_id"));
+				emp.setEmpName(rs.getString("emp_name"));
+				emp.setAddress(rs.getString("address"));
+				emp.setLatitude(rs.getString("latitude"));
+				emp.setLongitude(rs.getString("longitude"));
+				emp.setPincode(rs.getString("pincode"));
+				employeeList.add(emp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return employeeList;
+
+	}
+
 }

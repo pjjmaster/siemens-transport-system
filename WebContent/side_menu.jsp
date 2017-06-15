@@ -11,7 +11,7 @@
 			<!--/down-->
 							<div class="down">	
 									  <a href="index.html"><img src="images/admin.jpg"></a>
-									  <a href="index.html"><span class=" name-caret">Ssdgj sdgsg</span></a>
+									  <a href="index.html"><span class=" name-caret">Jasmin Leo</span></a>
 									 <p>Transport Administrator</p>
 									<ul>
 									<li><a class="tooltips" href="index.html"><span>Profile</span><i class="lnr lnr-user"></i></a></li>
@@ -27,7 +27,7 @@
 										 
 										 <li id="menu-academico" ><a href="#"><i class="fa fa-file-text-o"></i> <span>Pickup Points</span> <span class="fa fa-angle-right" style="float: right"></span></a>
 											 	
-									<li><a href="typography.html"><i class="lnr lnr-pencil"></i> <span>Clusters</span></a></li>
+									<li><a href="clusters.jsp"><i class="lnr lnr-pencil"></i> <span>Clusters</span></a></li>
 									<li id="menu-academico"> <a href="routeDraw.jsp"><i class="lnr lnr-book"></i> <span>Routes</span> <span class="fa fa-angle-right" style="float: right"></span></a>
 									</li>
 									 

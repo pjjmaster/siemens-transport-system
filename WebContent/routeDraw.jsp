@@ -79,7 +79,7 @@
 
 						<h3 class="inner-tittle two">Routes</h3>
 						<div class="grid-1">
-							<div id="dvMap" style="width: 80%; height: 700px"></div>
+							<div id="dvMap" style="width: 100%; height: 700px"></div>
 						
 
 						<%@include file="side_menu.jsp"%>
@@ -97,7 +97,7 @@ var bounds = null;
 function calcRoute() {
 
   map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
-  var msg ="41.077354,-81.511337:41.080647,-81.516579:41.077435,-81.521561:41.075253,-81.521492:41.074604,-81.520309:41.07415,-81.516335:41.073158,-81.514931:41.070534,-81.516563:41.066677,-81.516502:41.063942,-81.516502:41.06514,-81.513458:41.067383,-81.513412:41.069546,-81.513397:41.070778,-81.513382:41.072514,-81.512619:41.071106,-81.507614:41.073326,-81.506195";
+  var msg ="18.568848,73.774227:18.573728,73.774848:18.574735,73.770805:18.575048,73.766305:18.567749,73.767922:18.568848,73.774227";
   var input_msg=msg.split(":");
   var locations = new Array();      
 
@@ -109,7 +109,7 @@ function calcRoute() {
 
   var mapOptions = {
   center: locations[0],
-  zoom: 12,
+  zoom: 10,
   mapTypeId: google.maps.MapTypeId.ROADMAP  
   }
 

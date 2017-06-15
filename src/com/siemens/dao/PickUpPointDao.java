@@ -100,7 +100,7 @@ public class PickUpPointDao {
 			                LatLong latlong = new LatLong(rs.getString("GEOLOCATION_LAT"), rs.getString("GEOLOCATION_LONG"));
 							pickUpPoint.setGeoLocation(latlong);
 			                pickUpPoint.setPickUpLocation(rs.getString("ADDRESS")); 
-			           
+			                pickUpPoint.setEmployees(new EmployeeDao().getEmployeesByPickUpPoint(String.valueOf(pickUpPoint.getId())));
 			                PickUpPointList.add(pickUpPoint);
 			            }
 			        } catch (SQLException e) {

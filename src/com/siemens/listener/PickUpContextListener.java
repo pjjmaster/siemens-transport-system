@@ -31,7 +31,7 @@ public class PickUpContextListener implements ServletContextListener {
 			// update each employee Pickup point
 			for (PickUpPoint pickUp : pickUpPoints) {
 				for (Employee emp : pickUp.getEmployees()) {
-					emp.setPickUpPoint(pickUp.getPickUpLocation());
+					emp.setPickUpPoint(String.valueOf(pickUp.getId()));
 					empDao.updateEmployee(emp);
 				}
 

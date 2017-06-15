@@ -81,6 +81,7 @@ public class VehicleRoutingUtil {
 		{
 			List<PickUpPoint>pickUpPointsList = PICKUPPOINTDAO.getAllPickUpPoints();
 			for (PickUpPoint pickUpPoint : pickUpPointsList) {
+				
 				VehicleRoutingUtil.vrpTaskBuilder.addJob(Service.Builder.newInstance(String.valueOf(pickUpPoint.getId())).addSizeDimension(0, pickUpPoint.getEmployees().size()).setLocation(Location.newInstance( Double.parseDouble( pickUpPoint.getGeoLocation().getLatitude()), Double.parseDouble( pickUpPoint.getGeoLocation().getLongitude()))).build());
 			}
 			
@@ -90,6 +91,8 @@ public class VehicleRoutingUtil {
 		public static int getNumberOfVehicle()
 		{
 			int numberOfEmployees = EMPLOYEEDAO.getAllEmployee().size();
+			System.out.println(numberOfEmployees);
+			System.out.println(numberOfEmployees/ConstantPool.VEHICLECAPACITY);
 			return  numberOfEmployees/ConstantPool.VEHICLECAPACITY; 
 		}
 		
@@ -98,15 +101,18 @@ public class VehicleRoutingUtil {
 		{	
 			
 			List<Bus> busList= BUSDAO.getAllBus();
-			for (int i=1;i<=getNumberOfVehicle();i++)
+			System.out.println(getNumberOfVehicle());
+			int numberOfVehicle= getNumberOfVehicle();
+			for (int i=0;i<numberOfVehicle;i++)
 			{
+				System.out.println(busList.get(i).getBusName());
 				VehicleType vehicleType= VehicleTypeImpl.Builder.newInstance(busList.get(i).getBusName()).addCapacityDimension(0, ConstantPool.VEHICLECAPACITY).setCostPerDistance(ConstantPool.COSTPERVEHICLE).build();
 				VehicleImpl vehicle = VehicleImpl.Builder.newInstance(busList.get(i).getBusName()).setStartLocation(Location.newInstance(ConstantPool.SIEMENS_LATITUDE, ConstantPool.SIEMENS_LONGITUDE)).setType(vehicleType).build();
 				VehicleRoutingUtil.vrpTaskBuilder.addVehicle(vehicle);
 			}
 			
 			//set fleetsize finite
-		    VehicleRoutingUtil.vrpTaskBuilder.setFleetSize(FleetSize.FINITE);
+		    //VehicleRoutingUtil.vrpTaskBuilder.setFleetSize(FleetSize.FINITE);
 		    //build problem
 		    VehicleRoutingProblem vehicleRoutingProblem = VehicleRoutingUtil.vrpTaskBuilder.build();
 		    VehicleRoutingAlgorithm vehicleRoutingAlgorithm = Jsprit.createAlgorithm(vehicleRoutingProblem);
@@ -122,18 +128,27 @@ public class VehicleRoutingUtil {
 			Double costs=bestSolution.getCost();
 			int routeNumber = 1000;
 		    List<RouteDetails> routeDetailsList = new ArrayList<>();
+		    List<RouteDetails> routeDetailsList2 = new ArrayList<>();
 		    List<VehicleRoute> vehicleRoutelist = new ArrayList<VehicleRoute>(bestSolution.getRoutes());
 		    Collections.sort(vehicleRoutelist , new com.graphhopper.jsprit.core.util.VehicleIndexComparator());
 		    
 		    for (VehicleRoute vehicleRoute : vehicleRoutelist)
 		    {
+		    	
+		    	
 		    	//RouteDetails routeInfo = new RouteDetails(routeNu,getVehicleString(route),route.getStart().getName(),"-", Math.round(costs));
 		    	//The below commented Row was for first row which has not values
 		    	//RouteDetails routeDetails= new RouteDetails(routeNumber, getVehicleString(route), route.getStart().getName(), "-", Math.round(route.getStart().getEndTime()),costs);
 		    	//routeDetailsList.add(routeDetails);
-		    	TourActivity prevAct = vehicleRoute.getStart();
 		    	
+		    	List<Route> routeList1 = new ArrayList<>();
+		        RouteDetails details = new RouteDetails(routeNumber, getVehicleString(vehicleRoute));
+		        Route route1=new Route(details.getRoutNumber(),details.getVehicleName());
+		        routeList1.add(route1);
+		        
+		    	TourActivity prevAct = vehicleRoute.getStart();   	
 		    	RouteDetails routeDetailstemp=null;
+		  
 	            for (TourActivity act : vehicleRoute.getActivities()) {
 	                String jobId;
 	                if (act instanceof TourActivity.JobActivity) {
@@ -171,7 +186,8 @@ public class VehicleRoutingUtil {
 	                	PICKUPPOINTDAO.updateRouteId(Integer.parseInt(routeDetails.getpickUpID()), routeDetails.getRoutNumber());
 	                	
 	                }
-	                ROUTEDAO.addAllRoute(routeList);	                
+	               
+	           ROUTEDAO.addAllRoute1(routeList1);                     
 		    	
 		    }
 		 

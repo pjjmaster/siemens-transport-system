@@ -68,6 +68,13 @@ public class RouteDetails {
 		this.costs = costs;
 	}
 
+	public RouteDetails(int routNumber, String vehicleName) {
+		super();
+		this.routNumber = routNumber;
+		this.vehicleName = vehicleName;
+	
+	}
+
 
 	
 

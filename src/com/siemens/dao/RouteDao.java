@@ -37,6 +37,22 @@ public class RouteDao {
 		}
 	}
 
+	public void addRoute1(Route route) {
+		try {
+			String sql = "INSERT INTO route(ROUTEID,BUSID)"
+					+ " VALUES (?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, route.getRouteID());
+			ps.setString(2, route.getBusID());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void removeRoute(int routeId) {
 		try {
 			String sql = "DELETE FROM route WHERE ROUTEID=?";
@@ -125,6 +141,11 @@ public class RouteDao {
 	public void addAllRoute(List<Route> routeList) {
 		for (Route route : routeList) {
 			addRoute(route);
+		}
+	}
+	public void addAllRoute1(List<Route> routeList) {
+		for (Route route : routeList) {
+			addRoute1(route);
 		}
 	}
 }
