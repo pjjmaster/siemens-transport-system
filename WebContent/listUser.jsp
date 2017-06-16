@@ -1,3 +1,5 @@
+<%@page import="com.mysql.jdbc.StringUtils"%>
+<%@page import="com.siemens.dao.PickUpPointDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,6 +84,7 @@
 						<%
 							//empBean emp = new empBean();
 							EmployeeDao dao = new EmployeeDao();
+							PickUpPointDao pickdao = new PickUpPointDao();
 							List<Employee> employeeList = dao.getAllEmployee();
 						%>
 
@@ -119,7 +122,13 @@
 											<td><%=emp.getAddress()%></td>
 											<td><%=emp.getLatitude()%></td>
 											<td><%=emp.getLongitude()%></td>
-											<td><%=emp.getPickUpPoint()%></td>
+											<%
+											String pickUpPoint="";
+											if(null!=emp.getPickUpPoint()&&!"".equals(pickUpPoint)){
+											 pickUpPoint=pickdao.getPickUpPointById(Integer.parseInt(emp.getPickUpPoint())).getPickUpLocation();
+											}
+											%>
+											<td><%=pickUpPoint%></td>
 											<td><%=emp.getPincode()%></td>
 											<td><a
 												href="EmployeeController?action=editform&empId=<%=emp.getId()%>">Update</a>

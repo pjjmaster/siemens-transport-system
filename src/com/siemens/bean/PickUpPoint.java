@@ -13,6 +13,7 @@ public class PickUpPoint {
 	private LatLong geoLocation;
 	private List<Employee> employees;
     private int routeID;
+    private int pickUpSequence;
 	
 	
 	
@@ -83,6 +84,13 @@ public class PickUpPoint {
 	 */
 	public void setRouteID(int routeID) {
 		this.routeID = routeID;
+	}
+	
+	public int getPickUpSequence() {
+		return pickUpSequence;
+	}
+	public void setPickUpSequence(int pickUpSequence) {
+		this.pickUpSequence = pickUpSequence;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

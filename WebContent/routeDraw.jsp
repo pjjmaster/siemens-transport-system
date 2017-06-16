@@ -1,10 +1,27 @@
+<%@page import="com.siemens.bean.PickUpPoint"%>
+<%@page import="com.siemens.dao.RouteDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="com.siemens.bean.Employee"%>
+<%@ page import="com.siemens.bean.Route"%>
 <%@ page import="com.siemens.dao.EmployeeDao"%>
+<%@ page import="com.siemens.dao.RouteDao"%>
+<%@ page import="com.siemens.dao.PickUpPointDao"%>
 <%@ page import="java.util.*"%>
 
+
+<%
+Set<Integer>routeSet= new RouteDao().getAllRouteId();
+//PickUpPointDao pDao= PickUpPointDao();
+
+for(Integer routeId:routeSet){
+List<PickUpPoint> pickUpPointList= new PickUpPointDao().getPickUpPointsInaRoute(routeId);
+
+
+}
+
+%>
 <html>
 <head>
 <title>Siemens Employee Transport Services</title>
@@ -97,7 +114,8 @@ var bounds = null;
 function calcRoute() {
 
   map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
-  var msg ="18.568848,73.774227:18.573728,73.774848:18.574735,73.770805:18.575048,73.766305:18.567749,73.767922:18.568848,73.774227";
+ // var msg ="18.568848,73.774227:18.446773025,73.87376892499998:18.53236846536043,73.8739200337436:18.537621299818102,73.88193829514258:18.541805788286638,73.88069797609863:18.568848,73.774227";
+ var msg ="18.568848,73.774227:18.51531021406917,73.90158000850307:18.568848,73.774227";
   var input_msg=msg.split(":");
   var locations = new Array();      
 

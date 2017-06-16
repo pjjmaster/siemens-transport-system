@@ -3,13 +3,14 @@ package com.siemens.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.graphhopper.jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import com.graphhopper.jsprit.core.algorithm.box.Jsprit;
 import com.graphhopper.jsprit.core.problem.Location;
 import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
-import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem.FleetSize;
 import com.graphhopper.jsprit.core.problem.job.Service;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import com.graphhopper.jsprit.core.problem.solution.route.VehicleRoute;
@@ -128,9 +129,9 @@ public class VehicleRoutingUtil {
 			Double costs=bestSolution.getCost();
 			int routeNumber = 1000;
 		    List<RouteDetails> routeDetailsList = new ArrayList<>();
-		    List<RouteDetails> routeDetailsList2 = new ArrayList<>();
 		    List<VehicleRoute> vehicleRoutelist = new ArrayList<VehicleRoute>(bestSolution.getRoutes());
 		    Collections.sort(vehicleRoutelist , new com.graphhopper.jsprit.core.util.VehicleIndexComparator());
+		    Set<Route> routeSet=new HashSet<Route>();
 		    
 		    for (VehicleRoute vehicleRoute : vehicleRoutelist)
 		    {
@@ -141,13 +142,10 @@ public class VehicleRoutingUtil {
 		    	//RouteDetails routeDetails= new RouteDetails(routeNumber, getVehicleString(route), route.getStart().getName(), "-", Math.round(route.getStart().getEndTime()),costs);
 		    	//routeDetailsList.add(routeDetails);
 		    	
-		    	List<Route> routeList1 = new ArrayList<>();
 		        RouteDetails details = new RouteDetails(routeNumber, getVehicleString(vehicleRoute));
-		        Route route1=new Route(details.getRoutNumber(),details.getVehicleName());
-		        routeList1.add(route1);
 		        
-		    	TourActivity prevAct = vehicleRoute.getStart();   	
-		    	RouteDetails routeDetailstemp=null;
+		    	TourActivity prevAct = vehicleRoute.getStart();
+		    	routeDetailsList.clear();
 		  
 	            for (TourActivity act : vehicleRoute.getActivities()) {
 	                String jobId;
@@ -161,35 +159,27 @@ public class VehicleRoutingUtil {
 	                c += vehicleRoutingProblem.getActivityCosts().getActivityCost(act, act.getArrTime(), vehicleRoute.getDriver(), vehicleRoute.getVehicle());
 	                costs += c; 
 	                
-	                routeDetailstemp = new RouteDetails(routeNumber, getVehicleString(vehicleRoute), act.getName(), jobId, Math.round(vehicleRoute.getStart().getEndTime()),costs);
+	                RouteDetails routeDetailstemp = new RouteDetails(routeNumber, getVehicleString(vehicleRoute), act.getName(), jobId, Math.round(vehicleRoute.getStart().getEndTime()),costs);
 	                routeDetailsList.add(routeDetailstemp);
 	                prevAct = act;
 	            }
 	            
-	            double c = vehicleRoutingProblem.getTransportCosts().getTransportCost(prevAct.getLocation(), vehicleRoute.getEnd().getLocation(), prevAct.getEndTime(),
-	                    vehicleRoute.getDriver(), vehicleRoute.getVehicle());
-	                c += vehicleRoutingProblem.getActivityCosts().getActivityCost(vehicleRoute.getEnd(), vehicleRoute.getEnd().getArrTime(), vehicleRoute.getDriver(), vehicleRoute.getVehicle());
-	                costs += c;
-	                //The below commented Row was for last row which has not values
-	                //routeDetailstemp = new RouteDetails(routeNumber, getVehicleString(vehicleRoute), vehicleRoute.getEnd().getName(),  "-", Math.round(vehicleRoute.getStart().getEndTime()),costs);
-	                //routeDetailsList.add(routeDetailstemp);
-	                routeNumber++;
+	            routeNumber++;
 	                
-	                // Now  Populating Route table in DB and routeId in PickUpPoint table
-	                Route route=null;
-	                List<Route> routeList=new ArrayList<>();
-	                List<String>pickUpIdList=new ArrayList<>();
-	                for(RouteDetails routeDetails:routeDetailsList){
-	                	route=new Route(routeDetails.getRoutNumber(),routeDetails.getVehicleName());
-	                	routeList.add(route);
-	                	pickUpIdList.add(routeDetails.getpickUpID());
-	                	PICKUPPOINTDAO.updateRouteId(Integer.parseInt(routeDetails.getpickUpID()), routeDetails.getRoutNumber());
+	            // Now  Populating Route table in DB and routeId in PickUpPoint table
+	                
+	            List<String>pickUpIdList=new ArrayList<String>();
+	            int pickUpSeq=0;
+	            for(RouteDetails routeDetails:routeDetailsList){
+	                Route route=new Route(routeDetails.getRoutNumber(),routeDetails.getVehicleName());
+	                routeSet.add(route);
 	                	
-	                }
-	               
-	           ROUTEDAO.addAllRoute1(routeList1);                     
-		    	
+	                pickUpIdList.add(routeDetails.getpickUpID());
+	                PICKUPPOINTDAO.updateRouteId(Integer.parseInt(routeDetails.getpickUpID()), routeDetails.getRoutNumber(),pickUpSeq++);
+	                	
+	          }
 		    }
+	        ROUTEDAO.addAllRoute1(routeSet);   
 		 
 		}
 			

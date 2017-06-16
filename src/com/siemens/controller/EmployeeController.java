@@ -52,7 +52,7 @@ public class EmployeeController extends HttpServlet {
         	 emp.setLatitude(latitude);
         	 emp.setLongitude(longitude);
         	 emp.setPickUpPoint(pickUpPoint);
-        	 emp.setPincode((pincode));
+        	 emp.setPincode(pincode);
         	dao.addEmployee(emp);
         	redirect = EmployeeRecord;
             request.setAttribute("employeeList", dao.getAllEmployee());    

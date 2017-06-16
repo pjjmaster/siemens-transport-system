@@ -63,12 +63,13 @@ public class PickUpPointDao {
 		return pickUpPoint;
 	}
 	
-	public void updateRouteId(int pickUpId, int routeId) {
+	public void updateRouteId(int pickUpId, int routeId, int seq) {
 		try {
-			String sql = "UPDATE PICKUPPOINT SET ROUTEID=? WHERE PICKUPPOINTID=?";
+			String sql = "UPDATE PICKUPPOINT SET ROUTEID=?,PICKUPSEQUENCE=? WHERE PICKUPPOINTID=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, routeId);
-			ps.setInt(2, pickUpId);
+			ps.setInt(2, seq);
+			ps.setInt(3, pickUpId);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -108,6 +109,31 @@ public class PickUpPointDao {
 			        }
 
 			        return PickUpPointList;
-			    } 
+			    }
+		 
+		 public List<PickUpPoint> getPickUpPointsInaRoute(int routeId){
+			   List<PickUpPoint> pickUpPointList= new ArrayList<>();
+			   try{
+				   String sql="SELECT * FROM PICKUPPOINT  WHERE ROUTEID=? ORDER BY(PICKUPSEQUENCE)";
+				   PreparedStatement ps = conn.prepareStatement(sql);
+				   ps.setInt(1,routeId);
+		           ResultSet rs = ps.executeQuery();
+		           while (rs.next()) {
+		                PickUpPoint pickUpPoint = new PickUpPoint();
+		                pickUpPoint.setId(rs.getInt("PICKUPPOINTID"));
+						pickUpPoint.setGeoLocation(new LatLong(rs.getString("GEOLOCATION_LAT"), rs.getString("GEOLOCATION_LONG")));
+		                pickUpPoint.setPickUpLocation(rs.getString("ADDRESS")); 
+		                pickUpPoint.setEmployees(new EmployeeDao().getEmployeesByPickUpPoint(String.valueOf(pickUpPoint.getId())));
+		                pickUpPoint.setPickUpSequence(rs.getInt("PICKUPSEQUENCE"));
+		                pickUpPointList.add(pickUpPoint);
+		            }
+			   }
+			   catch(SQLException e){
+				   e.printStackTrace();
+				   
+			   }
+			   return pickUpPointList;
+			 
+		 }
 
 }

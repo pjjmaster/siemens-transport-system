@@ -78,12 +78,7 @@ public class Route {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((busID == null) ? 0 : busID.hashCode());
-		result = prime * result + ((routeCost == null) ? 0 : routeCost.hashCode());
-		result = prime * result + ((routeDistance == null) ? 0 : routeDistance.hashCode());
 		result = prime * result + routeID;
-		result = prime * result + ((routeName == null) ? 0 : routeName.hashCode());
-		result = prime * result + ((routeTravelTime == null) ? 0 : routeTravelTime.hashCode());
 		return result;
 	}
 	@Override
@@ -95,35 +90,11 @@ public class Route {
 		if (getClass() != obj.getClass())
 			return false;
 		Route other = (Route) obj;
-		if (busID == null) {
-			if (other.busID != null)
-				return false;
-		} else if (!busID.equals(other.busID))
-			return false;
-		if (routeCost == null) {
-			if (other.routeCost != null)
-				return false;
-		} else if (!routeCost.equals(other.routeCost))
-			return false;
-		if (routeDistance == null) {
-			if (other.routeDistance != null)
-				return false;
-		} else if (!routeDistance.equals(other.routeDistance))
-			return false;
 		if (routeID != other.routeID)
-			return false;
-		if (routeName == null) {
-			if (other.routeName != null)
-				return false;
-		} else if (!routeName.equals(other.routeName))
-			return false;
-		if (routeTravelTime == null) {
-			if (other.routeTravelTime != null)
-				return false;
-		} else if (!routeTravelTime.equals(other.routeTravelTime))
 			return false;
 		return true;
 	}
+
 	  
 	  
 }

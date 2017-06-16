@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.siemens.bean.Route;
 import com.siemens.dbconnection.ConnectionProvider;
@@ -143,9 +145,26 @@ public class RouteDao {
 			addRoute(route);
 		}
 	}
-	public void addAllRoute1(List<Route> routeList) {
+	public void addAllRoute1(Set<Route> routeList) {
 		for (Route route : routeList) {
 			addRoute1(route);
 		}
+	}
+	public Set<Integer> getAllRouteId(){
+		Set<Integer> routeIdSet= new HashSet<>();
+		try {
+			String sql = "SELECT ROUTEID FROM ROUTE";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				routeIdSet.add(rs.getInt("ROUTEID"));
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return routeIdSet;
+		
 	}
 }

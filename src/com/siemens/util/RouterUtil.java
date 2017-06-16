@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.siemens.bean.Employee;
 import com.siemens.bean.LatLong;
@@ -69,7 +70,7 @@ public class RouterUtil {
 		while ((line = reader.readLine()) != null) {
 			outputString += line;
 		}
-		System.out.println(" outputString " + outputString);
+		//System.out.println(" outputString " + outputString);
 
 		String geoHashCode = outputString.substring(headerString.length());
 
@@ -157,7 +158,7 @@ public class RouterUtil {
 
 		com.siemens.bean.placeapi.Location nearByPlace = service.getNearByPlace(location);
 		if (null == nearByPlace) {
-			System.out.println("Near By Place Not Found For :" + latLong);
+			//System.out.println("Near By Place Not Found For :" + latLong);
 			nearByPlace = location;
 		}
 		return new LatLong(String.valueOf(nearByPlace.getLat()), String.valueOf(nearByPlace.getLng()));
@@ -171,6 +172,7 @@ public class RouterUtil {
 		// Get All clusterPoint
 		Set<String> custerset = clusterdMap.keySet();
 		List<LatLong> latlongList = new ArrayList<>();
+		AtomicInteger routeId=new AtomicInteger(0);
 		for (String cluster : custerset) {
 
 			List<Employee> employeeList = clusterdMap.get(cluster);
@@ -179,7 +181,7 @@ public class RouterUtil {
 				latlongList.add(new LatLong(emp.getLatitude(), emp.getLongitude()));
 			}
 			LatLong cetralLatLong = getCentralLocationToCluster(latlongList);
-			System.out.println("central Location For " + cluster + " " + cetralLatLong);
+			//System.out.println("central Location For " + cluster + " " + cetralLatLong);
 
 			LatLong nearestLocationToCentralPoint = null;
 			try {
@@ -198,19 +200,19 @@ public class RouterUtil {
 			}
 			LatLong nearByPlace = getNearByPlace(cetralLatLong);
 			String locationName = getLocationName(nearByPlace);
+			//Setting Route ID to Int
+			pickPoint.setId(routeId.incrementAndGet());
+			
 			if (null != locationName) {
 				pickPoint.setPickUpLocation(locationName);
-				pickPoint.setId(Math.abs(locationName.hashCode()));
 			} else {
 				pickPoint.setPickUpLocation(DEF_LOCATION_NAME);
-				pickPoint.setId(Math.abs(nearestLocationToCentralPoint.hashCode()));
-				System.out.println("Pick Up Id Is " + pickPoint.getId());
-
 			}
+			//System.out.println("Pick Up Id Is " + pickPoint.getId());
 			pickUpPointList.add(pickPoint);
 
 		}
-		System.out.println("All pickUp Points are " + pickUpPointList);
+		//System.out.println("All pickUp Points are " + pickUpPointList);
 		return pickUpPointList;
 
 	}
