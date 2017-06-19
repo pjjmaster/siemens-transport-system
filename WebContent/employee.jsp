@@ -43,7 +43,7 @@
 <script src="<%=request.getContextPath()%>/js/skycons.js"></script>
 
 <script src="<%=request.getContextPath()%>/js/jquery.easydropdown.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBljSUkH0nH5Qi_FToOJ-6kd92XsijneJI"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyBPHqIMR9dGhP1LyOI5wZPuSGrhUVqLwRY"></script>
 <link type="text/css" rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
