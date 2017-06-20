@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.expression.MapAccessor;
+
+import com.google.gson.Gson;
 import com.siemens.bean.Employee;
 import com.siemens.dao.EmployeeDao;
+import com.siemens.service.PickUpService;
 
 
 public class EmployeeController extends HttpServlet {    
@@ -82,7 +87,15 @@ public class EmployeeController extends HttpServlet {
          } else if (action.equalsIgnoreCase("listAllEmployee")){
             redirect = EmployeeRecord;
             request.setAttribute("users", dao.getAllEmployee());
-         } else {
+         } 
+         else if(action.equalsIgnoreCase("getLatLongsPickUpsOfRoutes")){
+        	 Map<Integer,String>allPickUps=PickUpService.getInstance().getAllPickUpLatLong();
+        	 String pickUpJson=new Gson().toJson(allPickUps);
+        	 response.setContentType("application/json");
+        	 response.getWriter().write(pickUpJson);
+         }
+        else {
+         
             redirect = INSERT;
         }
 

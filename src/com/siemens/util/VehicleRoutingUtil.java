@@ -142,7 +142,7 @@ public class VehicleRoutingUtil {
 		    	//RouteDetails routeDetails= new RouteDetails(routeNumber, getVehicleString(route), route.getStart().getName(), "-", Math.round(route.getStart().getEndTime()),costs);
 		    	//routeDetailsList.add(routeDetails);
 		    	
-		        RouteDetails details = new RouteDetails(routeNumber, getVehicleString(vehicleRoute));
+		        //RouteDetails details = new RouteDetails(routeNumber, getVehicleString(vehicleRoute));
 		        
 		    	TourActivity prevAct = vehicleRoute.getStart();
 		    	routeDetailsList.clear();

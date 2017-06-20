@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/jSprit-CustomAnalytics.jar"/>
 	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/jSprit-CustomCore.jar"/>
 	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="D:/HackathonWorkspace/siemens-transport-system/WebContent/WEB-INF/lib/gson-2.6.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
